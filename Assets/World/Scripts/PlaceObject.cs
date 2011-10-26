@@ -6,6 +6,8 @@ public class PlaceObject : MonoBehaviour {
 
     public GameObject DragObject;
 
+    public GameObject plate;
+
 	// Use this for initialization
 	void Start () {
 	    
@@ -35,11 +37,12 @@ public class PlaceObject : MonoBehaviour {
 
             RaycastHit hit;
 
-            if (GameObject.Find("Plane").collider.Raycast(ray, out hit, 1000))
+            if (plate.collider.Raycast(ray, out hit, 1000))
             {
                 Vector3 position = hit.point;
                 position.x = (float)Math.Round((position.x+4) / 8) * 8;
                 position.z = (float)Math.Round((position.z-4) / 8) * 8;
+                position.y = 3.2f;
 
                 DragObject.transform.position = position;
             }

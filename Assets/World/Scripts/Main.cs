@@ -40,6 +40,12 @@ public class Main : MonoBehaviour {
 	}
 	void OnGUI(){
 		int i;
+        
+        if(placeObjectScript.DragObject == null)
+        {
+            selected = null;
+        }
+
         for (i = 0; i < blockDatas.Count; i++)
 		{
             if (GUI.Toggle(new Rect(10, 10 + 25 * i, 100, 20), (selected != null && selected.ID == blockDatas[i].ID), blockDatas[i].File))
