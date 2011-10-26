@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlaceObject : MonoBehaviour {
 
-    GameObject dragObject;
+    public GameObject DragObject;
 
 	// Use this for initialization
 	void Start () {
@@ -13,22 +13,22 @@ public class PlaceObject : MonoBehaviour {
 
     public void DragGameObject(GameObject dragObject)
     {
-        this.dragObject = dragObject;
+        this.DragObject = dragObject;
     }
 
     public void StopDrag(bool destroy = false)
     {
-        if (this.dragObject != null)
+        if (this.DragObject != null)
         {
-            Destroy(this.dragObject);
+            Destroy(this.DragObject);
         }
-        this.dragObject = null;
+        this.DragObject = null;
     }
 	
 	// Update is called once per frame
 	void Update () 
     {
-        if (dragObject != null)
+        if (DragObject != null)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -36,7 +36,7 @@ public class PlaceObject : MonoBehaviour {
 
             if (GameObject.Find("Plane").collider.Raycast(ray, out hit, 1000))
             {
-                dragObject.transform.position = hit.point;
+                DragObject.transform.position = hit.point;
             }
         }
 	}
