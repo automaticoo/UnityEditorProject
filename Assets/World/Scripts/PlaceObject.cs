@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class PlaceObject : MonoBehaviour {
 
@@ -36,7 +37,15 @@ public class PlaceObject : MonoBehaviour {
 
             if (GameObject.Find("Plane").collider.Raycast(ray, out hit, 1000))
             {
-                DragObject.transform.position = hit.point;
+                Vector3 position = hit.point;
+                position.x = (float)Math.Round((position.x+4) / 8) * 8;
+                position.z = (float)Math.Round((position.z-4) / 8) * 8;
+
+                DragObject.transform.position = position;
+            }
+            if (Input.GetMouseButtonDown(0))
+            {
+                DragObject = null;
             }
         }
 	}
