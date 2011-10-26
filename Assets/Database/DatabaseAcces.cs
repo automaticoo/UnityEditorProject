@@ -51,7 +51,7 @@ public class DatabaseAcces {
         return readArray;
     }
 
-    public void CloseDB()
+    public void CloseDatabase()
     {
         if (reader != null)
         {

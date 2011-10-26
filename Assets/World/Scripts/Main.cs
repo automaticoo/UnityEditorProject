@@ -13,7 +13,7 @@ public class Main : MonoBehaviour {
 
         databaseAcces = new DatabaseAcces();
         databaseAcces.OpenDatabase("collections.data");
-        Debug.Log(databaseAcces.ReadFullTable("blocks"));
+        databaseAcces.CloseDatabase();
 
 		block = (GameObject)Instantiate(Resources.Load("block1x1"), new Vector3(0,0,0), new Quaternion(0,0,0, 0));
 		block.transform.Rotate(new Vector3(-90, 0, 0));
