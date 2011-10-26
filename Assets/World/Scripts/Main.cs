@@ -18,6 +18,7 @@ public class Main : MonoBehaviour {
 		block = (GameObject)Instantiate(Resources.Load("block1x1"), new Vector3(0,0,0), new Quaternion(0,0,0, 0));
 		block.transform.Rotate(new Vector3(-90, 0, 0));
 		block.transform.Translate(0,-8, 0);
+
 	}
 	
 	// Update is called once per frame
