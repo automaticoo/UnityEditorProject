@@ -7,7 +7,8 @@ public class PlaceObject : MonoBehaviour {
     public GameObject DragObject;
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+    {
 	    
 	}
 
@@ -32,22 +33,35 @@ public class PlaceObject : MonoBehaviour {
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            RaycastHit hit;
+            RaycastHit[] hits = Physics.RaycastAll(ray, 1000, 1 << 8);
+            RaycastComparer comparer = new RaycastComparer();
 
-            if (Physics.Raycast(ray, out hit, 1000, 1 << 8))
+            Array.Sort(hits, comparer);
+
+            for (int i = 0; i < hits.Length; i++)
             {
+                RaycastHit hit = hits[i];
+
                 Vector3 gameObjectPosition = hit.collider.gameObject.transform.position;
 
                 Vector3 position = hit.point;
 
-                position.x = (float)Math.Round((position.x + 4) / 8) * 8;
-                position.z = (float)Math.Round((position.z - 4) / 8) * 8;
-                position.y = gameObjectPosition.y + hit.collider.bounds.size.y;
+                Debug.Log(hit.normal.y);
 
-                Debug.Log(hit.collider.bounds.size.y + "," + gameObjectPosition.y);
+                if (hit.normal.y == 1)
+                {
+                    position.x = (float)Math.Round((position.x + 4) / 8) * 8;
+                    position.z = (float)Math.Round((position.z - 4) / 8) * 8;
+                    position.y = gameObjectPosition.y + hit.collider.bounds.size.y;
+                    DragObject.transform.position = position;
+                    break;
+                }
+                else
+                {
 
-                DragObject.transform.position = position;
+                }
             }
+
             if (Input.GetMouseButtonDown(0))
             {
                 DragObject.layer = 8;
