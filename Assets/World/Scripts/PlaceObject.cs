@@ -6,8 +6,6 @@ public class PlaceObject : MonoBehaviour {
 
     public GameObject DragObject;
 
-    public GameObject plate;
-
 	// Use this for initialization
 	void Start () {
 	    
@@ -30,6 +28,34 @@ public class PlaceObject : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
+        if (DragObject != null)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, 1000, 1 << 8))
+            {
+                Vector3 gameObjectPosition = hit.collider.gameObject.transform.position;
+
+                Vector3 position = hit.point;
+
+                position.x = (float)Math.Round((position.x + 4) / 8) * 8;
+                position.z = (float)Math.Round((position.z - 4) / 8) * 8;
+                position.y = gameObjectPosition.y + hit.collider.bounds.size.y;
+
+                Debug.Log(hit.collider.bounds.size.y + "," + gameObjectPosition.y);
+
+                DragObject.transform.position = position;
+            }
+            if (Input.GetMouseButtonDown(0))
+            {
+                DragObject.layer = 8;
+                DragObject = null;
+            }
+        }
+
+        /*
         if (DragObject != null)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -69,11 +95,6 @@ public class PlaceObject : MonoBehaviour {
 
                 DragObject = null;
             }
-        }
+        }*/
 	}
-
-    void place(GameObject currentObject, GameObject onObject)
-    {
-
-    }
 }

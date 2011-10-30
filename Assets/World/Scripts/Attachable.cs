@@ -8,6 +8,8 @@ using System.Text;
 public class Attachable : MonoBehaviour
 {
     public GameObject[,] grid;
+    public int[,] attachedGrid;
+    public GameObject attached;
 
     public int width = -1;
     public int height = -1;
