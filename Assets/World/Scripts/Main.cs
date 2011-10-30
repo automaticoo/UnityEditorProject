@@ -59,6 +59,11 @@ public class Main : MonoBehaviour {
 
                     block = (GameObject)Instantiate(Resources.Load(blockDatas[i].File), new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
                     block.transform.Rotate(new Vector3(-90, 0, 0));
+
+                    Attachable attachable = block.AddComponent<Attachable>();
+
+                    attachable.CreateGrid(blockDatas[i].AvailableWidth, blockDatas[i].AvailableHeight);
+
                     placeObjectScript.DragGameObject(block);
                 }
                 selected = blockDatas[i];

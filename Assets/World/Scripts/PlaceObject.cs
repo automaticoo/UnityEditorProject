@@ -13,7 +13,6 @@ public class PlaceObject : MonoBehaviour {
 	    
 	}
 
-
     public void DragGameObject(GameObject dragObject)
     {
         this.DragObject = dragObject;
@@ -46,10 +45,35 @@ public class PlaceObject : MonoBehaviour {
 
                 DragObject.transform.position = position;
             }
-            if (Input.GetMouseButtonDown(0))
+            if ( Input.GetMouseButtonDown(0))
             {
+                place(DragObject, plate);
+
+                //calculate relative grid attach space
+                int x = (int)Math.Round((DragObject.transform.position.x+plate.transform.position.x) / 8);
+                int y = (int)Math.Round((DragObject.transform.position.x - plate.transform.position.z) / 8);
+                //reform it with array acces -1
+                x -= 1;
+                y -= 1;
+
+                if (plate.GetComponent<Attachable>().grid[x, y])
+                {
+                    Destroy(DragObject);
+                    Debug.Log("destroy");
+                }
+                else
+                {
+                    plate.GetComponent<Attachable>().grid[x, y] = DragObject;
+                    Debug.Log("place");
+                }
+
                 DragObject = null;
             }
         }
 	}
+
+    void place(GameObject currentObject, GameObject onObject)
+    {
+
+    }
 }

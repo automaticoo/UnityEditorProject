@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Database\DatabaseAcces.cs" />
+     <Compile Include="Assets\World\Scripts\Attachable.cs" />
      <Compile Include="Assets\World\Scripts\Main.cs" />
      <Compile Include="Assets\World\Scripts\PlaceObject.cs" />
      <Compile Include="Assets\World\data\Block.cs" />
